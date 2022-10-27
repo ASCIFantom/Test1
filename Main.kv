@@ -1,0 +1,133 @@
+WindowManager:
+	MainWindow:
+	SecondWindow:
+	ThirdWindow:
+
+
+
+
+<MainWindow>:
+	name:'Main'
+
+
+	canvas.before:
+		Color:
+			rgba:(1,1,1,1)
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			source:'zastava.png'
+	
+
+	BoxLayout:
+		orientation:'horizontal'
+		size: root.width, root.height
+		spacing: 10
+		padding: 10
+		background_normal:''
+
+
+		RoundedButton:		
+
+			background_normal: 'CP4.png'
+			on_press: 
+
+				#app.call()
+
+				#app.root.call_number(self)
+				
+			on_release:
+
+				app.root.current='second'
+				root.manager.transition.direction = 'right'
+
+				
+
+		RoundedButton:
+
+			background_normal: 'CH1.png'
+
+			on_press:
+				app.root.current='third'
+				root.manager.transition.direction = 'left'
+
+
+
+<SecondWindow>:
+	name:'second'
+
+	canvas.before:
+		Color:
+			rgba:(1,1,1,1)
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			source:'zastava.png'
+
+	
+
+	BoxLayout:
+		spacing: 10
+		padding: 10
+		#orientation:'horizontal'
+		size: root.width, root.height
+		
+
+
+		
+
+		RoundedButton:
+
+
+			background_normal: 'ECP2.png'
+
+			
+			on_press: 
+				app.root.current='Main'
+				root.manager.transition.direction = 'left'
+
+<ThirdWindow>:
+	name:'third'
+
+	canvas.before:
+		Color:
+			rgba:(1,1,1,1)
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			source:'zastava.png'
+
+	BoxLayout:
+		spacing: 10
+		padding: 10
+		size: root.width, root.height
+
+
+
+
+		RoundedButton:
+
+			background_normal: 'ECP3.png'
+
+			
+
+			on_release: 
+				app.root.current='Main'
+				root.manager.transition.direction = 'right'
+
+
+
+
+
+<RoundedButton@Button>
+	id: cta
+	animated_color:(1,0,0,1)
+	background_normal:''
+	blink_size:0
+	canvas.before:
+		Color:
+			rgba:self.animated_color
+		RoundedRectangle:
+			size:self.blink_size,self.blink_size
+			pos:self.pos[0] + self.size[0]/2. - self.blink_size/2., self.pos[1] + self.size[1]/2. - self.blink_size/2.
+			radius:[8]
